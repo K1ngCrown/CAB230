@@ -13,27 +13,24 @@ function Stock() {
 
 
    const columns = [
-    { headerName: "Name", field: "name" },
-    { headerName: "Symbol", field: "symbol" },
-    { headerName: "Industry", field: "industry" }
+    { headerName: "Name", field: "name", sortable: true, filter:true },
+    { headerName: "Symbol", field: "symbol", sortable: true, filter:true },
+    { headerName: "Industry", field: "industry", sortable: true, filter:true }
   ];
+
+  
 
   const [stockData, changeStockData] = useState([]);
     
     
     useEffect(() => {
-        var myURL = "http://131.181.190.87:3000/stocks/symbols";
-        var myRequest = new Request(myURL);
-        fetch(myURL)
-              .then((response) => {
-                response.json().then(data => {
-                  changeStockData(data)
+        fetch("http://131.181.190.87:3000/stocks/symbols")
+              .then((response) => { response.json()
+                .then(stockData => { changeStockData(stockData)
                 })
               });
     }, []);
-
     
-
     return (    
       <div
         className ="ag-theme-balhma"
