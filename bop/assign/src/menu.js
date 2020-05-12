@@ -6,7 +6,7 @@ function Menu() {
         <header>
        
         
-         <Link to = '/'>Home</Link>
+        <Link to = '/'>Home</Link>
         <Link to = '/stocks'>Stocks</Link>
         <Link to = '/quote'>Quote</Link>
         <Link to = '/price'>Price History (restricted)</Link>

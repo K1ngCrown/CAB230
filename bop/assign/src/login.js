@@ -1,30 +1,70 @@
 import React from 'react';
-//import jwt from 'jsonwebtoken'
+import { useState } from 'react';
+import Home from './home';
+import { Switch, Route,Link, Redirect } from 'react-router-dom';
 
-const API_URL = "http://131.181.190.87:3000"
 
-function App() {
+
+
+const API_URL = "http://131.181.190.87:3000/user/login"
+
 function Login() {
-    const url = `${API_URL}/user/login`
 
-    return fetch(url, {
+    const [emailAddress, checkEmail] = useState([]);
+    const [passwordInput, checkPassword] = useState([]);
+
+   const getLogin = (event) => {
+    event.preventDefault();
+    fetch(API_URL, {
         method: "POST",
-        headers: { accept: "application/json", "Content-Type": "application/json"},
-        body: JSON.stringify({ email: "example@api.com", password: "asdlkfj1" })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email : emailAddress, password : passwordInput,}),
     })
         .then((res) => res.json())
-        .then((res) => {
-            console.log(res)
-            console.log("done")
+        .then((info) => {
+            console.log(info);
+            localStorage.setItem("token", info.token);
+
+            if  (getLogin == true){
+                console.log("hello")
+                console.log(info)
+            }
+            if (info.success){
+                return <Redirect to ='/home' />
+            }
+            else if (info.error){
+                return(
+                    <p>"Bad"</p>
+                )
+            .catch(err => { console.log(err) })
+            }
+
         })
     }
 
     return(
         <div>
-            <h1>JWT Token Example</h1>
+            <form onSubmit={getLogin}>
 
-            <button onClick={Login}>Login</button>
+                <label for = "email">Email:</label>
+                <input type="text" placeholder="Enter Username" name="email" required onChange={e => {
+                    checkEmail(e.target.value);
+                }}>
+                </input>
+                    
+                <br></br>
+
+                <label for = "password">Password:</label>
+                <input type="password" placeholder="Enter Password" name="password" required onChange={e => {
+                   checkPassword(e.target.value);
+                }}>
+                </input>
+                    
+
+                <br></br>
+                <input type="submit" value="Submit"></input>
+            </form>
         </div>
-    )
-}  
-export default App;
+    );
+};
+export default Login;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect,useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
@@ -33,15 +33,17 @@ function Stock() {
     
     return (    
       <div
-        className ="ag-theme-balhma"
+        className ="ag-theme-balham"
         style = {{
             height: "300px",
-            width: "600px"
+            width: "800px"
         }}
       >
         <AgGridReact
             columnDefs={columns}
             rowData={stockData}
+            pagination={true} 
+            paginationPageSize= {7}
         />
       </div>
     );

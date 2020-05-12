@@ -26,12 +26,12 @@ header img {
 }
 body {
   height: 125vh;
-  background-image: url('https://i.ytimg.com/vi/if-2M3K1tqk/maxresdefault.jpg');
+  background-color: gainsboro;
   background-size: cover;
   font-family: sans-serif;
   margin-top: 80px;
   padding: 30px;
-  color:white;
+  color:black;
   font-size: 14px;
 }
 
