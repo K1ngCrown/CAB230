@@ -33,19 +33,21 @@ function Quote() {
     
     return (    
       <div>
-        <input value={stockSymbol} onChange={(e) => changeStockSymbol(e.target.value)} placeholder="Search stock symbol..."></input>
+        
         <div
           className ="ag-theme-balham"
           style = {{
-              height: "600px",
-              width: "1000px"
+              height: "100px",
+              width: "1605px"
           }}
         >
+            <h1>Search by company symbol to get a quote</h1>
+            <input value={stockSymbol} onChange={(e) => changeStockSymbol(e.target.value)} placeholder="Search stock symbol..."></input>
           <AgGridReact
               columnDefs={quote}
               rowData={stockData}
-              pagination={true} 
-              paginationPageSize= {1}
+              
+              
           />
         </div>
       </div>

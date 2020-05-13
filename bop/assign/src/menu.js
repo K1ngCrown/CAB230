@@ -8,18 +8,11 @@ let checkAuthentication;
 function Menu() {
     return (
         
-        <header>
-       
-        
+        <header id="nav">
         <Link to = '/'>Home</Link>
         <Link to = '/stocks'>Stocks</Link>
-        <Link to = '/quote'>Quote</Link>
-        
-        
-            <Link to = '/price'>Price History (restricted)</Link>
-            
-       
-       
+        <Link to = '/quote'>Quote</Link>    
+        <Link to = '/price'>Price History (restricted)</Link>    
         <Link to = '/register'>Register</Link>
         <Link to = '/login'>Login</Link>
         </header>

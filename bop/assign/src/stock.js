@@ -30,18 +30,25 @@ function Stock() {
     }, []);
     
     return (    
+        
       <div
         className ="ag-theme-balham"
         style = {{
-            height: "300px",
-            width: "800px"
+            height: "450px",
+            width: "650px",
+            textAlign: "center",
+            paddingLeft: "500px",
+            paddingTop:"100px",
+            fontSize:"20px"
+           
         }}
       >
+          <h1>Company Stocks Page</h1>
         <AgGridReact
             columnDefs={columns}
             rowData={stockData}
             pagination={true} 
-            paginationPageSize= {8}
+            paginationPageSize= {13}
         />
       </div>
     );

@@ -46,19 +46,20 @@ function Login() {
     }
 
     return(
-        <div>
+        <div id="inputs">
+            <h1>Log into account</h1>
             <form onSubmit={getLogin}>
 
-                <label for = "email">Email:</label>
-                <input type="text" placeholder="Enter Username" name="email" required onChange={e => {
+                <h2>Email</h2>
+                <input id="email" type="text"  name="email" size="30"  required onChange={e => {
                     checkEmail(e.target.value);
                 }}>
                 </input>
                     
                 <br></br>
 
-                <label for = "password">Password:</label>
-                <input type="password" placeholder="Enter Password" name="password" required onChange={e => {
+                <h2>Password</h2>
+                <input id="password" type="password"  name="password" required onChange={e => {
                    checkPassword(e.target.value);
                 }}>
                 </input>
