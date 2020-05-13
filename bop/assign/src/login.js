@@ -3,9 +3,12 @@ import { useState } from 'react';
 import Home from './home';
 import { Switch, Route,Link, Redirect } from 'react-router-dom';
 
-
-
-
+const token = localStorage.getItem("token")
+const headers = {
+    accept: "aaplication/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`
+}
 const API_URL = "http://131.181.190.87:3000/user/login"
 
 function Login() {

@@ -4,13 +4,12 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
+
 // useEffect => call the request on page load
 // useState => store / track variable
 
 
 function Stock() {
-
-
 
    const columns = [
     { headerName: "Name", field: "name", sortable: true, filter:true },
@@ -18,7 +17,6 @@ function Stock() {
     { headerName: "Industry", field: "industry", sortable: true, filter:true }
   ];
 
-  
 
   const [stockData, changeStockData] = useState([]);
     
@@ -43,7 +41,7 @@ function Stock() {
             columnDefs={columns}
             rowData={stockData}
             pagination={true} 
-            paginationPageSize= {7}
+            paginationPageSize= {8}
         />
       </div>
     );
