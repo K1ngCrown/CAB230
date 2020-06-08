@@ -13,8 +13,6 @@
   font-size: large;
 }
 
-
-
 #headings{
   font-size: 250px;
 }
@@ -67,6 +65,7 @@ header a {
   margin: 20px;
   font-size: 30px;
   padding-left: 30px;
+  font-weight: 900;
 }
 
 header a {
@@ -76,47 +75,38 @@ header a {
 }
 
 #inputs{
-  padding-left: 900px;
+  padding-left: 1000px;
   padding-top: 100px;
+
 }
 
 #email{
   padding: 10px;
+  size:40;
 }
 
 #password{
   padding: 10px;
+  padding-bottom: 10px;
+}
+
+#submit{
+  padding: 10px;
+  padding-top: 10px;
+}
+
+#sideImage{
+  position: relative;
+  right:500px;
+  bottom:160px  
+}
+
+#sideImages{
+  position: relative;
+  right:500px;
+  bottom:116px  
 }
 
 
 
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

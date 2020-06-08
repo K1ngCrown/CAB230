@@ -4,10 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var stockRouter = require('./routes/stocks');
+var userRouter = require('./routes/user');
 
 var app = express();
+
+// CORS / Helmet
+const helmet = require('helmet');
+const cors = require('cors');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,14 +25,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// CORS
+app.use(logger('common'));
+app.use(helmet());
+app.use(cors());
+
+// Logger
+// ADD THIS
+
+// Knex
+const options = require('./knexfile.js');
+const knex = require('knex')(options);
+app.use((req, res, next) => {
+  req.db = knex
+  next()
+})
+
 app.use('/', indexRouter);
 app.use('/stocks', stockRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  //next(createError(404));
-  return res.sendStatus(404).send({sucess:false, message: '404: Not found'})
-
+  next(createError(404));
 });
 
 // error handler
