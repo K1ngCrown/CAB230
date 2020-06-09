@@ -82,7 +82,8 @@ router.post("/login", function (req, res, next) {
       const expires_in = 86400; 
       //Make this send a success response 200
       console.log("Passwords match")
-      res.status(200).json({token_type:"Bearer", expires_in: expires_in});
+      //token is whack right now
+      res.status(200).json({token_type:"Bearer", expires_in: expires_in, token: 2930192301});
       //create and return JWT token
       const secretKey = "secret key";
       

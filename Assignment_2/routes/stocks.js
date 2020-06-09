@@ -30,7 +30,7 @@ router.get('/symbols', (req, res) => {
 
     req.db.from('stocks').distinct('name', 'symbol', 'industry').modify((query) => {
         if (industry) {
-            query.where('industry', 'LIKE', "%"+industry+"%")
+            query.where('industry', 'LIKE', "%" + industry + "%")
         }
     })
         .then((rows) => {
@@ -77,6 +77,44 @@ router.get('/:symbols', (req, res) => {
         })
 
 });
+
+
+
+const authorize = (req, res, next) => {
+    const authorization = req.headers.authorization
+    let token = null;
+
+    // retrieve token
+    if (authorization && authorization.split(" ").length === 2) {
+        token = authorization.split(" ")[1]
+        console.log("Token: ", token)
+    } else {
+        console.log("Unauthorized user")
+        return
+    }
+
+    try {
+        const decoded = jwt.verify(token, secretKey)
+
+        if (decoded.exp < Date.now()) {
+            console.log("Token has expired")
+            return
+        }
+
+        next()
+    } catch (e) {
+        console.log("Token is not valid: ", err)
+    }
+}
+
+router.post("stocks/authed:stock", authorize, function (req, res) {
+    if (!req.body.email || !req.body.password || !req.body.hash) {
+        res.status(400).json({ error: true, message: "Parameters allowed are 'from' and 'to', example: /stocks/authed/AAL?from=2020-03-15" })
+        return;
+    }
+}
+)
+
 
 
 /*
