@@ -30,7 +30,7 @@ router.get('/symbols', (req, res) => {
 
     req.db.from('stocks').distinct('name', 'symbol', 'industry').modify((query) => {
         if (industry) {
-            query.where('industry', '=', industry)
+            query.where('industry', 'LIKE', "%"+industry+"%")
         }
     })
         .then((rows) => {
@@ -64,7 +64,7 @@ router.get('/:symbols', (req, res) => {
 
     req.db.from('stocks').distinct('*').where("symbol", stockSymbol)
         .then((rows) => {
-            if (rows !== 0) {
+            if (rows.length !== 0) {
                 res.status(200).json(rows[0])
             } else {
                 res.status(404).json({ "error": true, "message": "No entry for symbol in stocks database" })
