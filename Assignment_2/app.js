@@ -4,12 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-
 var indexRouter = require('./routes/index');
 var stockRouter = require('./routes/stocks');
 var userRouter = require('./routes/user');
 
 var app = express();
+
+// Swagger
+const swaggerUI = require('swagger-ui-express');
+yaml = require('yamljs');
+swaggerDocument = yaml.load('./swagger.yaml');
 
 // CORS / Helmet
 const helmet = require('helmet');
@@ -33,6 +37,13 @@ app.use(cors());
 // Logger
 // ADD THIS
 
+logger.token('req', (req, res) => JSON.stringify(req.headers))
+logger.token('res', (req, res) => {
+  const headers = {}
+  res.getHeaderNames().map(h => headers[h] = res.getHeader(h))
+  return JSON.stringify(headers)
+})
+
 // Knex
 const options = require('./knexfile.js');
 const knex = require('knex')(options);
@@ -44,6 +55,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/stocks', stockRouter);
 app.use('/user', userRouter);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
