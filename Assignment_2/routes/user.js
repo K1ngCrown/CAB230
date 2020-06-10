@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -79,18 +80,14 @@ router.post("/login", function (req, res, next) {
         return;
       }
 
-      const expires_in = 86400; 
-      //Make this send a success response 200
+      
       console.log("Passwords match")
-      //token is whack right now
-      res.status(200).json({token_type:"Bearer", expires_in: expires_in, token: 2930192301});
       //create and return JWT token
       const secretKey = "secret key";
-      
+      const expires_in = 86400; 
       const exp = Date.now() + expires_in * 1000;
       const token = jwt.sign({ email, exp }, secretKey);
-      //res.json({ token_type: "Bearer", token, expires_in })
-      //res.status(200).json({ success: true, token_type: "Bearer", token: token, expires_in:expires_in });
+      res.status(200).json({token_type:"Bearer", expires_in: expires_in, token: token});
       return;
     })
 })
